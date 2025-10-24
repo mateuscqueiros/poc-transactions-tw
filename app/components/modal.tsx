@@ -3,25 +3,10 @@ import { useState, ReactNode } from "react";
 
 type ModalProps = {
   title?: string;
-  children: ReactNode;
-  triggerLabel: string;
-  confirmLabel?: string;
-  onConfirm?: () => void;
 } & React.PropsWithChildren;
 
-export default function Modal({
-  title = "Confirmação",
-  children,
-  triggerLabel,
-  confirmLabel = "Confirmar",
-  onConfirm,
-}: ModalProps) {
+export default function Modal({ title = "Confirmação", children }: ModalProps) {
   const [open, setOpen] = useState(false);
-
-  const handleConfirm = () => {
-    onConfirm?.();
-    setOpen(false);
-  };
 
   return (
     <>

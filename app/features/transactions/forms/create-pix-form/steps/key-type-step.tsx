@@ -31,7 +31,7 @@ export function KeyTypeStep() {
     <div className="space-y-4">
       <h2 className="text-lg font-semibold">Escolha o tipo da chave PIX</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {keyTypes.map(({ name, value }) => {
           const selected = keyType === value;
           return (
@@ -44,15 +44,7 @@ export function KeyTypeStep() {
               }`}
               onClick={() => handleChange(value)}
             >
-              <div className="card-body p-4 items-center text-center">
-                <input
-                  type="radio"
-                  value={value}
-                  {...register("keyType")}
-                  checked={selected}
-                  onChange={() => handleChange(value)}
-                  className="radio radio-primary mb-2"
-                />
+              <div className="card-body flex flex-row justify-between p-4 items-center text-center">
                 <span
                   className={`font-medium ${
                     selected ? "text-primary" : "text-base-content"
@@ -60,6 +52,15 @@ export function KeyTypeStep() {
                 >
                   {name}
                 </span>
+
+                <input
+                  type="radio"
+                  value={value}
+                  {...register("keyType")}
+                  checked={selected}
+                  onChange={() => handleChange(value)}
+                  className="radio radio-primary"
+                />
               </div>
             </label>
           );

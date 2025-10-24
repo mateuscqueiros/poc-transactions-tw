@@ -13,13 +13,16 @@
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-hook-form": "^7.65.0"
+    "react-hook-form": "^7.65.0",
+    "react-imask": "^7.6.1",
+    "react-input-mask": "^2.0.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-input-mask": "^3.0.6",
     "daisyui": "^5.3.8",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
