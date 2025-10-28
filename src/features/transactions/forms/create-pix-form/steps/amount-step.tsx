@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormContext, Controller } from "react-hook-form";
-import { CurrencyInput } from "@/app/components/forms/currency-input";
+import { CurrencyInput } from "@/components/forms/currency-input";
 
 export function AmountStep() {
   const {

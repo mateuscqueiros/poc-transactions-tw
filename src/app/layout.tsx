@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Layout from "./components/layout";
-import { AnimatedLayout } from "./components/animations/page-transition";
+import "../globals.css";
+import { Layout } from "@/components/layout";
+import { TransactionsProvider } from "@/features/transactions/providers/transaction-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <TransactionsProvider>
+          <Layout>{children}</Layout>
+        </TransactionsProvider>
       </body>
     </html>
   );

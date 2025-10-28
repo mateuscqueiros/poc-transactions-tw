@@ -23,10 +23,7 @@ export function InputKeyStep() {
 
     unregister("key");
     clearErrors("key");
-    setValue("key", "");
   }, [keyType, setValue, clearErrors, unregister]);
-
-  console.log(keyType);
 
   const config = inputSchema[keyType as TransactionKeyType];
   const { deps, ...rules } = config.validation;

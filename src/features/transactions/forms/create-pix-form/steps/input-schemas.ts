@@ -1,4 +1,4 @@
-import { InputSchemaType } from "@/app/types/inputs";
+import { InputSchemaType } from "@/types/inputs";
 import { TransactionKeyType } from "../../../types";
 
 export const inputSchema: InputSchemaType<TransactionKeyType> = {

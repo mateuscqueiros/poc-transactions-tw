@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
 import { TransactionFormType } from "../../types";
-import { MotionDiv } from "@/app/components/animations/motion-div";
+import { MotionDiv } from "@/components/animations/motion-div";
 import { KeyTypeStep, InputKeyStep, ReviewStep, AmountStep } from "./steps";
 import { StepControls } from "./step-controls";
 
@@ -59,7 +59,7 @@ export function CreatePixForm({ onSubmitAction }: CreatePixFormProps) {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-between bg-base-100 rounded-xl p-6 w-full max-w-lg mx-auto min-h-[420px]"
+        className="flex flex-col justify-between bg-base-100 rounded-xl w-full max-w-lg mx-auto min-h-[600px]"
       >
         <AnimatePresence
           mode="wait"

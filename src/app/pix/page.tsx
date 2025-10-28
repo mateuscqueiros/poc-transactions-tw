@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { CreatePixForm } from "../features/transactions/forms/create-pix-form";
+import { CreatePixForm } from "@/features/transactions/forms/create-pix-form";
 
 export default function PixPage() {
-  const router = useRouter();
   const handleSubmit = (values: any) => {
     console.log(values);
   };
