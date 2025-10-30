@@ -1,12 +1,15 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import { IMaskInput } from "react-imask";
-import { TransactionFormType, TransactionKeyType } from "../../../types";
-import { inputSchema } from "./input-schemas";
+import {
+  inputSchema,
+  TransactionFormType,
+  TransactionKeyType,
+} from '@/features/transactions/types';
+import { useEffect } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import { IMaskInput } from 'react-imask';
 
-export function InputKeyStep() {
+export default function InputKeyStep() {
   const {
     watch,
     setValue,
@@ -16,19 +19,17 @@ export function InputKeyStep() {
     unregister,
   } = useFormContext<TransactionFormType>();
 
-  const keyType = watch("keyType");
-
-  console.log(keyType);
+  const keyType = watch('keyType');
 
   useEffect(() => {
     if (!keyType) return;
 
-    unregister("key");
-    clearErrors("key");
+    unregister('key');
+    clearErrors('key');
   }, [keyType, setValue, clearErrors, unregister]);
 
   const config = inputSchema[keyType as TransactionKeyType];
-  const { deps, ...rules } = config.validation;
+  const { deps, ...rules } = config ? config.validation : {};
 
   if (!keyType || !(keyType in inputSchema)) {
     return (
@@ -54,7 +55,9 @@ export function InputKeyStep() {
               unmask={true}
               placeholder={config.placeholder}
               onAccept={(val: string) => field.onChange(val)}
-              className={`input input-bordered w-full ${errors.key ? "input-error" : ""}`}
+              className={`input input-bordered w-full ${
+                errors.key ? 'input-error' : ''
+              }`}
             />
           )}
         />
