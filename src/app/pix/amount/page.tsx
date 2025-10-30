@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useFormContext, Controller } from "react-hook-form";
-import { CurrencyInput } from "@/components/forms/currency-input";
+import { CurrencyInput } from '@/components/forms/currency-input';
+import { Controller, useFormContext } from 'react-hook-form';
 
-export function AmountStep() {
+export default function AmountStep() {
   const {
     control,
     watch,
@@ -15,23 +15,22 @@ export function AmountStep() {
     <div className="w-full">
       <h2 className="text-lg font-semibold mb-2">Valor da transação</h2>
 
-      {/* Valor */}
       <div className="mb-4">
         <label className="block text-md font-medium mb-1">Valor</label>
         <Controller
           name="amount"
           control={control}
           rules={{
-            required: "O valor é obrigatório",
-            min: { value: 0.01, message: "O valor mínimo é R$ 0,01" },
+            required: 'O valor é obrigatório',
+            min: { value: 0.01, message: 'O valor mínimo é R$ 0,01' },
           }}
           render={({ field }) => (
             <CurrencyInput
               {...field}
-              value={field.value ?? ""}
+              value={field.value ?? ''}
               onChange={(val) => field.onChange(val)}
               className={`input input-bordered w-full ${
-                errors.amount ? "input-error" : ""
+                errors.amount ? 'input-error' : ''
               }`}
             />
           )}
@@ -44,11 +43,10 @@ export function AmountStep() {
         )}
       </div>
 
-      {/* Descrição */}
       <div>
         <label className="block text-md font-medium mb-1">Descrição</label>
         <textarea
-          {...register("description")}
+          {...register('description')}
           className="textarea textarea-bordered w-full"
           placeholder="Opcional"
         />

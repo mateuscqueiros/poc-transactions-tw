@@ -1,17 +1,25 @@
-import { useFormContext } from "react-hook-form";
-import { TransactionFormType, TransactionKeyType } from "../../../types";
-import { formatCurrency, formatKeyType } from "../../../lib/format";
-import { Suspense, use } from "react";
-import { getDestinatary } from "@/features/transactions/api";
+'use client';
+
+import { getDestinatary } from '@/features/transactions/api';
+import {
+  formatCurrency,
+  formatKeyType,
+} from '@/features/transactions/lib/format';
+import {
+  TransactionFormType,
+  TransactionKeyType,
+} from '@/features/transactions/types';
+import { Suspense, use } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 let destinataryPromise = getDestinatary();
 
 export function ReviewStepContent() {
   const { watch } = useFormContext<TransactionFormType>();
 
-  const key = watch("key");
-  const keyType = watch("keyType");
-  const amount = watch("amount");
+  const key = watch('key');
+  const keyType = watch('keyType');
+  const amount = watch('amount');
 
   const data = use(destinataryPromise);
 
@@ -70,7 +78,7 @@ export function ReviewStepContent() {
   );
 }
 
-export function ReviewStep() {
+export default function ReviewStep() {
   const LoadingDesinatary = (
     <div className="flex flex-col gap-4 justify-center items-center">
       <div className="skeleton h-[250px] w-full rounded-box"></div>

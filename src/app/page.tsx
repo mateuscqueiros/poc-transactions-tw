@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { TransactionList } from "@/features/transactions/components/transaction-list";
-import { formatCurrency } from "@/features/transactions/lib/format";
-import { useTransactions } from "@/features/transactions/providers/transaction-provider";
-import dayjs from "dayjs";
-import { useRouter } from "next/navigation";
+import { TransactionList } from '@/features/transactions/components/transaction-list';
+import { formatCurrency } from '@/features/transactions/lib/format';
+import { useTransactions } from '@/features/transactions/providers/transaction-provider';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
   const router = useRouter();
@@ -27,16 +27,16 @@ export default function HomePage() {
           <div className="card bg-base-300 p-4">
             <h3 className="font-semibold">Saldo disponível</h3>
             <p className="text-xl text-teal-600">
-              {formatCurrency(total, "pt-BR")}
+              {formatCurrency(total, 'pt-BR')}
             </p>
           </div>
           <div className="card bg-base-300 p-4">
             <h3 className="font-semibold">Última transação</h3>
             <p className="text-sm text-gray-500">
-              Última transação em{" "}
+              Última transação em{' '}
               {lastTransaction
-                ? dayjs(lastTransaction.completedAt).format("DD/MM [às] HH:mm")
-                : "Não há transações ainda"}
+                ? dayjs(lastTransaction.completedAt).format('DD/MM [às] HH:mm')
+                : 'Não há transações ainda'}
             </p>
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function HomePage() {
 
       <button
         className="btn btn-primary btn-lg mt-6"
-        onClick={() => router.push("/pix")}
+        onClick={() => router.push('/pix')}
       >
         Fazer Novo Pix
         <i className="ri-arrow-right-line"></i>

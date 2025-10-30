@@ -1,8 +1,11 @@
-"use client";
-import { useFormContext } from "react-hook-form";
-import { TransactionFormType, TransactionKeyType } from "../../../types";
-import { Suspense, use } from "react";
-import { getKeyTypes } from "@/features/transactions/api";
+'use client';
+import { getKeyTypes } from '@/features/transactions/api';
+import {
+  TransactionFormType,
+  TransactionKeyType,
+} from '@/features/transactions/types';
+import { Suspense, use } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 let keyTypesPromise = getKeyTypes();
 
@@ -36,12 +39,12 @@ function KeyTypesOptions() {
 
   const keyTypesData = use(keyTypesPromise);
 
-  const keyType = watch("keyType");
-  register("keyType", { required: "Selecione um tipo de chave" });
+  const keyType = watch('keyType');
+  register('keyType', { required: 'Selecione um tipo de chave' });
 
   const handleChange = (value: TransactionKeyType) => {
-    setValue("keyType", value);
-    resetField("key");
+    setValue('keyType', value);
+    resetField('key');
   };
 
   return (
@@ -54,15 +57,15 @@ function KeyTypesOptions() {
               key={value}
               className={`card border cursor-pointer transition-all ${
                 selected
-                  ? "border-primary bg-primary/10 ring-1 ring-primary"
-                  : "border-base-300 hover:border-primary/50"
+                  ? 'border-primary bg-primary/10 ring-1 ring-primary'
+                  : 'border-base-300 hover:border-primary/50'
               }`}
               onClick={() => handleChange(value)}
             >
               <div className="card-body flex flex-row justify-between p-4 items-center text-center">
                 <span
                   className={`font-medium ${
-                    selected ? "text-primary" : "text-base-content"
+                    selected ? 'text-primary' : 'text-base-content'
                   }`}
                 >
                   {name}
@@ -71,7 +74,7 @@ function KeyTypesOptions() {
                 <input
                   type="radio"
                   value={value}
-                  {...register("keyType")}
+                  {...register('keyType')}
                   checked={selected}
                   onChange={() => handleChange(value)}
                   className="radio radio-primary"
@@ -89,7 +92,7 @@ function KeyTypesOptions() {
   );
 }
 
-export function KeyTypeStep() {
+export default function KeyTypeStep() {
   const LoadingOptions = (
     <div className="grid grid-cols-2 gap-4">
       <div className="skeleton h-16 w-full rounded-box"></div>
