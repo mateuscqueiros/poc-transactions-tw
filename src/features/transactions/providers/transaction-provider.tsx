@@ -6,18 +6,12 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { api } from "@/lib/api";
 import { TransactionType } from "../types";
 import { getTransactions } from "../api";
 
-// Defina a URL da sua API mock
-const MOCK_API_URL = "https://mocki.io/v1/1342612f-8d55-459d-adfb-f400cfd27317";
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 interface TransactionsContextType {
   data: TransactionType[];
-  isLoading: boolean; // Adicionado estado de carregamento
+  isLoading: boolean;
   addTransaction: (transaction: TransactionType) => void;
   removeTransaction: (id: string) => void;
 }
@@ -32,7 +26,7 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     getTransactions()
-      .then((data: TransactionType[]) => {
+      .then((data) => {
         setTransactions(data);
       })
       .catch((error) => {

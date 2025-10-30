@@ -20,9 +20,6 @@ export async function getTransactions() {
     .then((response) => {
       return response.data;
     })
-    .catch(error => {
-      console.error("Erro ao buscar transações:", error);
-    });
 }
 
 export async function getDestinatary() {
