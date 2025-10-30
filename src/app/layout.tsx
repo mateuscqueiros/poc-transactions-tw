@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
 import { Layout } from "@/components/layout";
 import { TransactionsProvider } from "@/features/transactions/providers/transaction-provider";
+import { Toaster } from "sonner";
+
+import "../globals.css";
+import "remixicon/fonts/remixicon.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +34,7 @@ export default function RootLayout({
       >
         <TransactionsProvider>
           <Layout>{children}</Layout>
+          <Toaster richColors />
         </TransactionsProvider>
       </body>
     </html>

@@ -1,9 +1,3 @@
-import {
-  IconArrowDownLeft,
-  IconBolt,
-  IconCash,
-  IconCreditCard,
-} from "@tabler/icons-react";
 import { TransactionClass, TransactionKeyType } from "../types";
 
 export function formatClass(className: TransactionClass) {
@@ -53,17 +47,17 @@ export function formatCurrency(
 export function getCategoryIcon(className: TransactionClass) {
   switch (className) {
     case TransactionClass.Pix:
-      return <IconBolt size={20} />;
+      return <i className="ri-flashlight-fill"></i>;
     case TransactionClass.Debit:
-      return <IconArrowDownLeft size={20} />;
+      return <i className="ri-arrow-down-line"></i>;
     case TransactionClass.Credit:
-      return <IconCreditCard size={20} />;
+      return <i className="ri-bank-card-line"></i>;
     case TransactionClass.Transfer:
-      return <IconCash size={20} />;
+      return <i className="ri-money-dollar-circle-line"></i>;
     case TransactionClass.Deposit:
-      return <IconCash size={20} />;
+      return <i className="ri-money-dollar-circle-line"></i>;
     default:
-      return <IconCreditCard size={20} />;
+      return <i className="ri-money-dollar-circle-line"></i>;
   }
 }
 

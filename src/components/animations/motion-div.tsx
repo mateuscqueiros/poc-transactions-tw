@@ -15,7 +15,7 @@ export function MotionDiv({ motionKey, direction, children }: MotionDivProps) {
       initial={{ opacity: 0, x: isNext ? 80 : -80 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: isNext ? -80 : 80 }}
-      transition={{ duration: 0.15, ease: "easeInOut" }}
+      transition={{ duration: 0.15, type: "tween" }}
     >
       {children}
     </motion.div>

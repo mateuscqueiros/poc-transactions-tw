@@ -3,7 +3,6 @@
 import { TransactionList } from "@/features/transactions/components/transaction-list";
 import { formatCurrency } from "@/features/transactions/lib/format";
 import { useTransactions } from "@/features/transactions/providers/transaction-provider";
-import { IconArrowRight } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 
@@ -11,11 +10,16 @@ export default function HomePage() {
   const router = useRouter();
   const { data: transactions } = useTransactions();
 
+  console.log(transactions);
+
   const total = transactions.reduce((acc, curr) => acc + curr.amount, 0);
-  const lastTransaction = transactions.reduce((acc, curr) => {
-    dayjs(acc.completedAt).isAfter(dayjs(curr.completedAt)) && acc;
-    return acc;
-  });
+  const lastTransaction =
+    transactions.length > 0
+      ? transactions.reduce((acc, curr) => {
+          dayjs(acc.completedAt).isAfter(dayjs(curr.completedAt)) && acc;
+          return acc;
+        })
+      : null;
 
   return (
     <div className="p-6 flex flex-col justify-between h-full">
@@ -32,7 +36,9 @@ export default function HomePage() {
             <h3 className="font-semibold">Última transação</h3>
             <p className="text-sm text-gray-500">
               Última transação em{" "}
-              {dayjs(lastTransaction.completedAt).format("DD/MM [às] HH:mm")}
+              {lastTransaction
+                ? dayjs(lastTransaction.completedAt).format("DD/MM [às] HH:mm")
+                : "Não há transações ainda"}
             </p>
           </div>
         </div>
@@ -43,7 +49,7 @@ export default function HomePage() {
         onClick={() => router.push("/pix")}
       >
         Criar Nova Transação
-        <IconArrowRight className="ml-2 h-4 w-4" />
+        <i className="ri-arrow-right-line"></i>
       </button>
       <div className="py-6">
         <TransactionList data={transactions} />

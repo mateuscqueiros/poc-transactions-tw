@@ -12,6 +12,7 @@ type TransactionItemProps = {
 };
 
 export function TransactionItem({ data }: TransactionItemProps) {
+  console.log(data.class);
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex items-center gap-2 flex-1 overflow-hidden">

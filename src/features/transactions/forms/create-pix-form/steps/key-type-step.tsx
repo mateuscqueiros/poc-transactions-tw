@@ -1,23 +1,40 @@
 "use client";
 import { useFormContext } from "react-hook-form";
 import { TransactionFormType, TransactionKeyType } from "../../../types";
+import { Suspense, use } from "react";
+import { getKeyTypes } from "@/features/transactions/api";
 
-const keyTypes = [
-  { name: "CPF", value: TransactionKeyType.CPF },
-  { name: "CNPJ", value: TransactionKeyType.CNPJ },
-  { name: "Telefone", value: TransactionKeyType.Phone },
-  { name: "E-mail", value: TransactionKeyType.Email },
-  { name: "Chave aleatória", value: TransactionKeyType.Random },
-];
+let keyTypesPromise = getKeyTypes();
 
-export function KeyTypeStep() {
+/* function getKeyTypesResource() {
+  if (keyTypesData) return keyTypesData;
+
+  if (!keyTypesPromise) {
+    keyTypesPromise = loadKeyTypesWithDelay();
+
+    keyTypesPromise
+      .then((data) => {
+        keyTypesData = data;
+        keyTypesPromise = null;
+      })
+      .catch((err) => {
+        keyTypesPromise = null;
+        throw err;
+      });
+  }
+  throw keyTypesPromise;
+} */
+
+function KeyTypesOptions() {
   const {
     watch,
+    register,
     setValue,
     resetField,
     formState: { errors },
-    register,
   } = useFormContext<TransactionFormType>();
+
+  const keyTypesData = use(keyTypesPromise);
 
   const keyType = watch("keyType");
   register("keyType", { required: "Selecione um tipo de chave" });
@@ -28,18 +45,16 @@ export function KeyTypeStep() {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-lg font-semibold">Escolha o tipo da chave PIX</h2>
-
+    <>
       <div className="grid grid-cols-2 gap-4">
-        {keyTypes.map(({ name, value }) => {
+        {keyTypesData.map(({ name, value }) => {
           const selected = keyType === value;
           return (
             <label
               key={value}
               className={`card border cursor-pointer transition-all ${
                 selected
-                  ? "border-primary bg-primary/10 ring-2 ring-primary"
+                  ? "border-primary bg-primary/10 ring-1 ring-primary"
                   : "border-base-300 hover:border-primary/50"
               }`}
               onClick={() => handleChange(value)}
@@ -70,6 +85,29 @@ export function KeyTypeStep() {
       {errors.keyType && (
         <p className="text-error text-sm">{errors.keyType.message}</p>
       )}
+    </>
+  );
+}
+
+export function KeyTypeStep() {
+  const LoadingOptions = (
+    <div className="grid grid-cols-2 gap-4">
+      <div className="skeleton h-16 w-full rounded-box"></div>
+      <div className="skeleton h-16 w-full rounded-box"></div>
+      <div className="skeleton h-16 w-full rounded-box"></div>
+      <div className="skeleton h-16 w-full rounded-box"></div>
+      <div className="skeleton h-16 w-full rounded-box"></div>
+      <div className="skeleton h-16 w-full rounded-box"></div>
+    </div>
+  );
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-lg font-semibold">Escolha o tipo da chave PIX</h2>
+
+      <Suspense fallback={LoadingOptions}>
+        <KeyTypesOptions />
+      </Suspense>
     </div>
   );
 }

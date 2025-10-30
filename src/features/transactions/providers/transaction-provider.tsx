@@ -6,22 +6,43 @@ import {
   ReactNode,
   useEffect,
 } from "react";
+import { api } from "@/lib/api";
 import { TransactionType } from "../types";
-import { transactionsMockData } from "./mock-data";
+import { getTransactions } from "../api";
+
+// Defina a URL da sua API mock
+const MOCK_API_URL = "https://mocki.io/v1/1342612f-8d55-459d-adfb-f400cfd27317";
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 interface TransactionsContextType {
   data: TransactionType[];
+  isLoading: boolean; // Adicionado estado de carregamento
   addTransaction: (transaction: TransactionType) => void;
   removeTransaction: (id: string) => void;
 }
 
-const TransactionsContext = createContext<TransactionsContextType | undefined>(
-  undefined,
-);
+export const TransactionsContext = createContext<
+  TransactionsContextType | undefined
+>(undefined);
 
 export function TransactionsProvider({ children }: { children: ReactNode }) {
-  const [transactions, setTransactions] =
-    useState<TransactionType[]>(transactionsMockData);
+  const [transactions, setTransactions] = useState<TransactionType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getTransactions()
+      .then((data: TransactionType[]) => {
+        setTransactions(data);
+      })
+      .catch((error) => {
+        console.error("Falha fatal no carregamento inicial:", error);
+        setTransactions([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   function addTransaction(transaction: TransactionType) {
     setTransactions((prev) => [transaction, ...prev]);
@@ -33,7 +54,12 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
 
   return (
     <TransactionsContext.Provider
-      value={{ data: transactions, addTransaction, removeTransaction }}
+      value={{
+        data: transactions,
+        isLoading,
+        addTransaction,
+        removeTransaction,
+      }}
     >
       {children}
     </TransactionsContext.Provider>

@@ -1,14 +1,11 @@
 "use client";
 
-import { IconArrowLeft } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export type LayoutProps = {} & React.PropsWithChildren;
 
 export function Layout({ children }: LayoutProps) {
-  const [open, setOpen] = useState(false);
   const path = usePathname();
   const router = useRouter();
 
@@ -20,7 +17,7 @@ export function Layout({ children }: LayoutProps) {
         <header className="py-3 flex justify-between max-w-lg w-full mx-auto">
           <div>
             <button className="btn btn-circle" onClick={() => router.back()}>
-              <IconArrowLeft />
+              <i className="ri-arrow-left-line"></i>
             </button>
           </div>
         </header>

@@ -1,3 +1,5 @@
+export type KeyType = { name: string; value: TransactionKeyType };
+
 export interface TransactionType {
   id: string;
   description: string;
