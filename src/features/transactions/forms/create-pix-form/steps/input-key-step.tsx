@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useFormContext, Controller, RegisterOptions } from "react-hook-form";
+import { useEffect } from "react";
+import { useFormContext, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import { TransactionFormType, TransactionKeyType } from "../../../types";
 import { inputSchema } from "./input-schemas";
@@ -17,6 +17,8 @@ export function InputKeyStep() {
   } = useFormContext<TransactionFormType>();
 
   const keyType = watch("keyType");
+
+  console.log(keyType);
 
   useEffect(() => {
     if (!keyType) return;

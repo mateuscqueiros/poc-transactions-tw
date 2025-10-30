@@ -10,8 +10,6 @@ export default function HomePage() {
   const router = useRouter();
   const { data: transactions } = useTransactions();
 
-  console.log(transactions);
-
   const total = transactions.reduce((acc, curr) => acc + curr.amount, 0);
   const lastTransaction =
     transactions.length > 0
@@ -28,7 +26,7 @@ export default function HomePage() {
         <div className="grid grid-cols-2 gap-4">
           <div className="card bg-base-300 p-4">
             <h3 className="font-semibold">Saldo disponível</h3>
-            <p className="text-xl text-success">
+            <p className="text-xl text-teal-600">
               {formatCurrency(total, "pt-BR")}
             </p>
           </div>
@@ -48,7 +46,7 @@ export default function HomePage() {
         className="btn btn-primary btn-lg mt-6"
         onClick={() => router.push("/pix")}
       >
-        Criar Nova Transação
+        Fazer Novo Pix
         <i className="ri-arrow-right-line"></i>
       </button>
       <div className="py-6">
